@@ -1,0 +1,62 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: usuario
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: sigh
+    container_name: sigh-app
+    environment:
+      PHP_POST_MAX_SIZE: 256M
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - netsigh
+
+  db:
+    image: mysql:8.0
+    container_name: sighdb
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: sigh
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USER: user
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - netsigh
+
+  nginx:
+    image: nginx:alpine
+    container_name: sigh-nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - netsigh
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    container_name: sigh-phpmyadmin
+    links:
+      - db
+    ports:
+      - 81:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - netsigh
+
+networks:
+  netsigh:
+    driver: bridge
