@@ -20,7 +20,16 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->bigInteger('company_id')->unsigned();
+            $table->bigInteger('department_id')->unsigned();
+            $table->bigInteger('level_id')->unsigned();
+            $table->datetime('joined_at');
+            $table->datetime('left_at')->nullable();
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('level_id')->references('id')->on('levels');
         });
     }
 

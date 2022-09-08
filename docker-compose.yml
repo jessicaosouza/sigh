@@ -34,10 +34,10 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: sigh-nginx
+    container_name: asigh-nginx
     restart: unless-stopped
     ports:
-      - 80:80
+      - 82:80
     volumes:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d/
