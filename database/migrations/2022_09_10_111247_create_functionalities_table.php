@@ -17,10 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', '155');
             $table->text('description');
-            $table->bigInteger('level_id')->unsigned();
             $table->timestamps();
-
-            $table->foreign('level_id')->references('id')->on('levels');
         });
     }
 

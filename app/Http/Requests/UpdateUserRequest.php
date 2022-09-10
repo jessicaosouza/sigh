@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Services\AccessControlService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +15,8 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return AccessControlService::can('EditarUsuarios');
+
     }
 
     /**

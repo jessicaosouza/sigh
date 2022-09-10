@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Services\AccessControlService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateDepartmentRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateDepartmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return AccessControlService::can('EditarDepartamentos');
     }
 
     /**

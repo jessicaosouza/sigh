@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Services\AccessControlService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCompanyRequest extends FormRequest
@@ -13,7 +14,7 @@ class StoreCompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return AccessControlService::can('CadastrarEmpresas');
     }
 
     /**
