@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->text('description');
+            $table->bigInteger('company_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies');
         });
     }
 

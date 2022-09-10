@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateAssetRequest;
 use App\Http\Resources\AssetResource;
 use App\Models\Asset;
 use App\Services\AssetService;
+use Illuminate\Support\Facades\Gate;
 
 class AssetController extends Controller
 {
@@ -23,7 +24,6 @@ class AssetController extends Controller
 
     public function store(StoreAssetRequest $request)
     {
-        
         if($asset = AssetService::create($request))
         {
             return response(AssetResource::make($asset), 201);
@@ -33,6 +33,7 @@ class AssetController extends Controller
 
     public function show(Asset $asset)
     {
+        Gate::authorize('show', $asset);
         return response(AssetResource::make($asset), 200);
     }
 
