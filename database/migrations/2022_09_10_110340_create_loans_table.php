@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('lended_at');
-            $table->dateTime('retrieved_at')->nullable();
+            $table->date('lended_at');
+            $table->date('retrieved_at')->nullable();
             $table->bigInteger('asset_id')->unsigned();
             $table->bigInteger('lended_by')->unsigned();
             $table->bigInteger('user_id')->unsigned();

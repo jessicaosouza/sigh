@@ -24,7 +24,8 @@ class UpdateDepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'unique:departmens,name'],
+            'company_id' => ['required', 'exists:companies,id'],
         ];
     }
 }

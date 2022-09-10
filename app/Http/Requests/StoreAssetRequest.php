@@ -24,7 +24,11 @@ class StoreAssetRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'series_number' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:65535'],
+            'ordered_by' => ['required', 'exists:users,id'],
+            'acquired_by' => ['required', 'exists:users,id'],
         ];
     }
 }

@@ -24,7 +24,12 @@ class UpdateLoanRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'lended_at' => ['required', 'date_format:"Y-m-d"'],
+            'retrieved_at' => ['nullable', 'date_format:"Y-m-d"'],
+            'asset_id' => ['required', 'exists,assets,id'],
+            'lended_by' => ['required', 'exists,users,id'],
+            'user_id' => ['required', 'exists,users,id'],
+            'observations' => ['nullable', 'string', 'max:65535'],
         ];
     }
 }

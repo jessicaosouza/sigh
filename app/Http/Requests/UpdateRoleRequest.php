@@ -24,7 +24,8 @@ class UpdateRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:100', 'unique:roles,name'],
+            'description' => ['required', 'string', 'max:65535'],
         ];
     }
 }

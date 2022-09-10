@@ -24,7 +24,10 @@ class UpdateCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255', 'unique:companies,name'],
+            'trading_name' => ['required', 'string', 'max:255'],
+            'domain' => ['required', 'string', 'max:100', 'unique:companies,domain'],
+            'slug' => ['required', 'string', 'max:100', 'unique:companies,slug'],
         ];
     }
 }
