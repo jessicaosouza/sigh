@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +34,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('roles', [RoleController::class, 'store']);
     Route::get('roles/{role}', [RoleController::class, 'show']);
     Route::put('roles/{role}', [RoleController::class, 'update']);
+
+    Route::post('assets', [AssetController::class, 'store']);
+    Route::get('assets/{asset}', [AssetController::class, 'show']);
+    Route::put('assets/{asset}', [AssetController::class, 'update']);
 });
