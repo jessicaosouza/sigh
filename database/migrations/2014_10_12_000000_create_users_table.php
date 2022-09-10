@@ -17,10 +17,19 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->dateTime('joined_at')->nullable();
+            $table->dateTime('registered_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->bigInteger('department_id')->unsigned()->nullable();
+            $table->bigInteger('level_id')->unsigned()->nullable();
+            $table->bigInteger('role_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('level_id')->references('id')->on('levels');
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
