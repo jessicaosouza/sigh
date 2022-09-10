@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('assets', [AssetController::class, 'store']);
     Route::get('assets/{asset}', [AssetController::class, 'show']);
     Route::put('assets/{asset}', [AssetController::class, 'update']);
+
+    Route::post('loans', [LoanController::class, 'store']);
+    Route::get('loans/{loan}', [LoanController::class, 'show']);
+    Route::put('loans/{loan}', [LoanController::class, 'update']);
 });

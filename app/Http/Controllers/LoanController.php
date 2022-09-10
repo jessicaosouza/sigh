@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLoanRequest;
 use App\Http\Requests\UpdateLoanRequest;
+use App\Http\Resources\LoanResource;
 use App\Models\Loan;
+use App\Services\LoanService;
 
 class LoanController extends Controller
 {
@@ -15,7 +17,11 @@ class LoanController extends Controller
 
     public function store(StoreLoanRequest $request)
     {
-        //
+        if($loan = LoanService::create($request))
+        {
+            return response(LoanResource::make($loan), 201);
+        }
+        return response('',500);
     }
 
     public function list()
@@ -23,48 +29,17 @@ class LoanController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Loan  $loan
-     * @return \Illuminate\Http\Response
-     */
     public function show(Loan $loan)
     {
-        //
+        return response(LoanResource::make($loan), 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Loan  $loan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Loan $loan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateLoanRequest  $request
-     * @param  \App\Models\Loan  $loan
-     * @return \Illuminate\Http\Response
-     */
     public function update(UpdateLoanRequest $request, Loan $loan)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Loan  $loan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Loan $loan)
-    {
-        //
+        if(LoanService::update($request, $loan))
+        {
+            return response('', 200);
+        }
+        return response('',500);
     }
 }
