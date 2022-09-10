@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Company;
+use App\Models\Department;
 use App\Models\User;
 use App\Models\Level;
 use App\Models\Role;
@@ -22,6 +24,16 @@ class DatabaseSeeder extends Seeder
         Level::factory(1)->create(['id' => 1, 'name' =>'Desenvolvimento', 'description' => 'Desenvolvedores do sistema, possuem acesso liberado à todas as funcionalidades']);
         Level::factory(1)->create(['id' => 2, 'name' =>'Admin', 'description' => 'Responsáveis pela gestão dos usuários colaboradores e controle de acesso ao sistema']);
         Level::factory(1)->create(['id' => 3, 'name' =>'Colaboradores', 'description' => 'Colaboradores da empresa, possuem acesso limitado apenas aos recursos relacionados a eles']);
+
+        Company::factory(1)->create(['id' => 1, 'name' =>'Orion Tecnologia e Sistemas Agrícolas LTDA', 'trading_name' => 'Orion', 'slug' => 'orion', 'domain' => 'orion.ind.br']);
+
+        Department::factory(1)->create(['id' => 1, 'name' =>'Almoxarifado', 'company_id' => 1]);
+        Department::factory(1)->create(['id' => 2, 'name' =>'Expedição', 'company_id' => 1]);
+        Department::factory(1)->create(['id' => 3, 'name' =>'Financeiro', 'company_id' => 1]);
+        Department::factory(1)->create(['id' => 4, 'name' =>'Tecnologia', 'company_id' => 1]);
+        Department::factory(1)->create(['id' => 5, 'name' =>'PCP', 'company_id' => 1]);
+        Department::factory(1)->create(['id' => 6, 'name' =>'Produção', 'company_id' => 1]);
+        Department::factory(1)->create(['id' => 7, 'name' =>'Qualidade', 'company_id' => 1]);
 
         Role::factory(1)->create(['id' => 1, 'name' =>'Gerente de Desenvolvimento de Sistemas', 'description' => 'Lidera e gerencia equipe de TI']);
         Role::factory(1)->create(['id' => 2, 'name' =>'Gerente Financeiro', 'description' => 'Bla bla bla']);

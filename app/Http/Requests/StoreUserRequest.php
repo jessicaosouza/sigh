@@ -13,7 +13,7 @@ class StoreUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,7 +27,7 @@ class StoreUserRequest extends FormRequest
             'name' => ['required', 'string', 'max:255', 'min:3'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'department_id' => ['required', 'exists:departmens,id'],
+            'department_id' => ['required', 'exists:departments,id'],
             'level_id' => ['required', 'exists:levels,id'],
             'role_id' => ['required', 'exists:roles,id'],
         ];

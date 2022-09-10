@@ -14,7 +14,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,8 +26,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'min:3'],
-            'email' => ['required', 'email', 'unique:users,email', Rule::unique('users', 'email')->ignore($this->user->id)],
-            'department_id' => ['required', 'exists:departmens,id'],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user->id)],
+            'department_id' => ['required', 'exists:departments,id'],
             'level_id' => ['required', 'exists:levels,id'],
             'role_id' => ['required', 'exists:roles,id'],
         ];
