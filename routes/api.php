@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('companies', [CompanyController::class, 'store']);
     Route::get('companies/{company}', [CompanyController::class, 'show']);
     Route::put('companies/{company}', [CompanyController::class, 'update']);
+
+    Route::post('departments', [DepartmentController::class, 'store']);
+    Route::get('departments/{department}', [DepartmentController::class, 'show']);
+    Route::put('departments/{department}', [DepartmentController::class, 'update']);
 });

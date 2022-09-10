@@ -24,7 +24,7 @@ class StoreDepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'unique:departments,name'],
+            'name' => ['required', 'string', 'max:100'],
             'company_id' => ['required', 'exists:companies,id'],
         ];
     }
