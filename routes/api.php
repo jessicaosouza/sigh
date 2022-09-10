@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('departments', [DepartmentController::class, 'store']);
     Route::get('departments/{department}', [DepartmentController::class, 'show']);
     Route::put('departments/{department}', [DepartmentController::class, 'update']);
+
+    Route::post('roles', [RoleController::class, 'store']);
+    Route::get('roles/{role}', [RoleController::class, 'show']);
+    Route::put('roles/{role}', [RoleController::class, 'update']);
 });
