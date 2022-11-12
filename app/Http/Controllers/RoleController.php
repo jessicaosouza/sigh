@@ -2,46 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreRoleRequest;
-use App\Http\Requests\UpdateRoleRequest;
-use App\Http\Resources\RoleResource;
 use App\Models\Role;
-use App\Services\RoleService;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class RoleController extends Controller
 {
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
-    }
-    
-    public function list()
-    {
-        //
+        return Inertia::render('Role/Index', [
+            'roles' => Role::query()
+                ->when($request->input('search'), function($query, $search){
+                    $query->where('name', 'like', "%{$search}%");
+                })
+                ->paginate(10)
+                ->withQueryString()
+                ->through(fn($user) => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email
+                ]),
+            'filters' => $request->only(['search'])
+        ]);
     }
 
-    public function store(StoreRoleRequest $request)
+    public function create()
     {
-        if($role = RoleService::create($request))
-        {
-            return response(RoleResource::make($role), 201);
-        }
-        return response('',500);
+        return Inertia::render('Role/Create');
     }
 
     public function show(Role $role)
     {
-        return response(RoleResource::make($role));
+        return Inertia::render('Role/Show', [
+            'role' => $role
+        ]);
     }
 
-
-    public function update(UpdateRoleRequest $request, Role $role)
+    public function edit(Role $role)
     {
-        if(RoleService::update($request, $role))
-        {
-            return response('', 200);
-        }
-        return response('',500);
+        return Inertia::render('Role/Edit', [
+            'role' => $role
+        ]);
     }
-
 }

@@ -15,4 +15,10 @@ class LoanService
     {
         return $loan->update($request->all());
     }
+
+    public static function getLoans($request){
+        return Loan::query()
+            ->paginate(10)
+            ->withQueryString();
+    }
 }

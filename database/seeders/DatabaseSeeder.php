@@ -36,13 +36,13 @@ class DatabaseSeeder extends Seeder
         Department::factory(1)->create(['id' => 6, 'name' =>'Produção', 'company_id' => 1]);
         Department::factory(1)->create(['id' => 7, 'name' =>'Qualidade', 'company_id' => 1]);
 
-        Role::factory(1)->create(['id' => 1, 'name' =>'Gerente de Desenvolvimento de Sistemas', 'description' => 'Lidera e gerencia equipe de TI']);
-        Role::factory(1)->create(['id' => 2, 'name' =>'Gerente Financeiro', 'description' => 'Bla bla bla']);
-        Role::factory(1)->create(['id' => 3, 'name' =>'Auxiliar de Produção', 'description' => 'Bla bla bla']);
+        Role::factory(1)->create(['id' => 1, 'name' =>'Gerente de Desenvolvimento de Sistemas', 'description' => 'Lidera e gerencia equipe de TI', 'company_id' => 1]);
+        Role::factory(1)->create(['id' => 2, 'name' =>'Gerente Financeiro', 'description' => 'Bla bla bla', 'company_id' => 1]);
+        Role::factory(1)->create(['id' => 3, 'name' =>'Auxiliar de Produção', 'description' => 'Bla bla bla', 'company_id' => 1]);
 
-        User::factory(1)->create(['id'=>1,'email'=>'osz.jessica@gmail.com', 'email_verified_at' => now(), 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'remember_token' => Str::random(10), 'level_id'=>1]);
-        User::factory(1)->create(['id'=>2,'email'=>'camila@mailinator.com', 'email_verified_at' => now(), 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'remember_token' => Str::random(10), 'level_id'=>2, 'role_id' => 2]);
-        User::factory(1)->create(['id'=>3,'email'=>'nataly@mailinator.com', 'email_verified_at' => now(), 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'remember_token' => Str::random(10), 'level_id'=>3, 'role_id' => 3]);
+        User::factory(1)->create(['id'=>1, 'name'=>'Jessica Oliveira','email'=>'desenvolvimento@orion.ind.br', 'email_verified_at' => now(), 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'remember_token' => Str::random(10), 'level_id'=>1]);
+        User::factory(1)->create(['id'=>2, 'name'=>'Camila Freitas','email'=>'camila@mailinator.com', 'email_verified_at' => now(), 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'remember_token' => Str::random(10), 'level_id'=>2, 'role_id' => 2]);
+        User::factory(1)->create(['id'=>3, 'name'=>'Larissa','email'=>'larissa@mailinator.com', 'email_verified_at' => now(), 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'remember_token' => Str::random(10), 'level_id'=>3, 'role_id' => 3]);
 
         Functionality::factory(1)->create(['id' => 1, 'name' =>'CadastrarUsuarios', 'description' => 'Cadastrar usuários']);
         Functionality::factory(1)->create(['id' => 2, 'name' =>'ListarUsuarios', 'description' => 'Acessar listagem usuários']);
@@ -69,12 +69,17 @@ class DatabaseSeeder extends Seeder
         Functionality::factory(1)->create(['id' => 23, 'name' =>'EditarCargos', 'description' => 'Editar informações de cargos cadastrados']);
         Functionality::factory(1)->create(['id' => 24, 'name' =>'EditarUsuarios', 'description' => 'Editar informações de usuários cadastrados']);
 
-        
+
         $level = Level::find(1);
         $level->functionalities()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
         $level = Level::find(2);
         $level->functionalities()->sync([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]);
         $level = Level::find(3);
         $level->functionalities()->sync([2, 7, 8, 9, 15, 19]);
+
+        \App\Models\User::factory(100)->create();
+        \App\Models\Asset::factory(100)->create();
+        \App\Models\Company::factory(100)->create();
+        \App\Models\Loan::factory(100)->create();
     }
 }

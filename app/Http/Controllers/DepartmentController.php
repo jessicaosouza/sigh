@@ -2,50 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDepartmentRequest;
-use App\Http\Requests\UpdateDepartmentRequest;
-use App\Http\Resources\DepartmentResource;
-use App\Models\Department;
-use App\Services\DepartmentService;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
-    public function __construct()
+    public function index()
     {
-        $this->middleware('auth');
+        return Inertia::render('Department/Index');
     }
 
-    public function store(StoreDepartmentRequest $request)
+    public function create()
     {
-        if($department = DepartmentService::create($request))
-        {
-            return response(DepartmentResource::make($department), 201);
-        }
-        return response('',500);
-    }
-
-    public function update(UpdateDepartmentRequest $request, Department $department)
-    {
-        if(DepartmentService::update($request, $department))
-        {
-            return response('', 200);
-        }
-        return response('',500);
+        return Inertia::render('Department/Create');
     }
 
     public function show(Department $department)
     {
-        return response(DepartmentResource::make($department), 200);
+        return Inertia::render('Department/Show', [
+            'department' => $department
+        ]);
     }
 
     public function edit(Department $department)
     {
-        //
+        return Inertia::render('Department/Edit', [
+            'department' => $department
+        ]);
     }
-
-    public function list()
-    {
-        //
-    }
-
 }

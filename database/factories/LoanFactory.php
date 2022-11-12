@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Asset;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,12 @@ class LoanFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'lended_at' => fake()->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = 'America/Sao_Paulo'),
+            'retrieved_at' => fake()->dateTimeBetween($startDate = '-10 years', $endDate = 'now', $timezone = 'America/Sao_Paulo'),
+            'asset_id' => Asset::all()->random()->id,
+            'lended_by' => User::all()->random()->id,
+            'user_id' => User::all()->random()->id,
+            'observations' => fake()->sentence($nbWords = 6, $variableNbWords = true),
         ];
     }
 }

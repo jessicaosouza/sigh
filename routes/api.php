@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\AssetController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\LoanController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\CompanyController;
+use App\Http\Controllers\Api\DepartmentController;
+use App\Http\Controllers\Api\AssetController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\LoanController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -16,7 +16,8 @@ class DepartmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
+            'company' => CompanyResource::make($this->company)
         ];
     }
 }

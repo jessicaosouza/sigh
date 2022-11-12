@@ -24,6 +24,7 @@ class User extends Authenticatable
         'department_id',
         'level_id',
         'role_id',
+        'google_id'
     ];
 
     /**

@@ -18,4 +18,19 @@ class UserService
     {
         return $user->update($request->all());
     }
+
+    public static function getUsers($request){
+        return User::query()
+            ->when($request->input('search'), function($query, $search){
+                $query->where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->paginate(10)
+            ->withQueryString()
+            ->through(fn($user) => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email
+            ]);
+    }
 }

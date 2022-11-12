@@ -2,44 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLoanRequest;
-use App\Http\Requests\UpdateLoanRequest;
-use App\Http\Resources\LoanResource;
-use App\Models\Loan;
 use App\Services\LoanService;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class LoanController extends Controller
 {
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
+        return Inertia::render('Loan/Index', [
+            'loans' => LoanService::getLoans($request),
+            'filters' => $request->only(['search'])
+        ]);
     }
 
-    public function store(StoreLoanRequest $request)
+    public function create()
     {
-        if($loan = LoanService::create($request))
-        {
-            return response(LoanResource::make($loan), 201);
-        }
-        return response('',500);
-    }
-
-    public function list()
-    {
-        //
+        return Inertia::render('Loan/Create');
     }
 
     public function show(Loan $loan)
     {
-        return response(LoanResource::make($loan), 200);
+        return Inertia::render('Loan/Show', [
+            'loan' => $loan
+        ]);
     }
 
-    public function update(UpdateLoanRequest $request, Loan $loan)
+    public function edit(Loan $loan)
     {
-        if(LoanService::update($request, $loan))
-        {
-            return response('', 200);
-        }
-        return response('',500);
+        return Inertia::render('Loan/Edit', [
+            'loan' => $loan
+        ]);
     }
 }

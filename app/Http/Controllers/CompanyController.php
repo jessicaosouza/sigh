@@ -2,45 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCompanyRequest;
-use App\Http\Requests\UpdateCompanyRequest;
-use App\Http\Resources\CompanyResource;
-use App\Models\Company;
-use App\Services\CompanyService;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
-
-    public function __construct()
+    public function index()
     {
-        $this->middleware('auth');
+        return Inertia::render('Company/Index');
     }
 
-    public function store(StoreCompanyRequest $request)
+    public function create()
     {
-        if($company = CompanyService::create($request))
-        {
-            return response(CompanyResource::make($company), 201);
-        }
-        return response('',500);
-    }
-
-    public function update(UpdateCompanyRequest $request, Company $company)
-    {
-        if(CompanyService::update($request, $company))
-        {
-            return response('', 200);
-        }
-        return response('',500);
+        return Inertia::render('Company/Create');
     }
 
     public function show(Company $company)
     {
-        return response(CompanyResource::make($company), 200);
+        return Inertia::render('Company/Show', [
+            'company' => $company
+        ]);
     }
 
-    public function list()
+    public function edit(Company $company)
     {
-        //
+        return Inertia::render('Company/Edit', [
+            'company' => $company
+        ]);
     }
 }
