@@ -61,7 +61,7 @@ class Aws
             $error->project = 'sigh';
             $error->request_key = env('AWS_LAMBDA_REQUEST_KEY');
             $error->title = "Erro ao fazer upload de arquivos no S3 ==> uploadFileS3";
-            Http::post('https://in5wusn4jncnjtjbpt7vbii5zq0mobte.lambda-url.sa-east-1.on.aws/', $error);
+            Http::post(env('AWS_LAMBDA_URL'), $error);
             report($e);
             return false;
         }
