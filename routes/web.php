@@ -53,9 +53,11 @@ Route::middleware('auth')->group(function() {
     Route::get('/roles/{role}/edit', [RoleController::class, 'edit']);
 
     Route::get('/users', [UserController::class, 'index']);
+    Route::post('/users', [UserController::class, 'store']);
     Route::get('/users/create', [UserController::class, 'create']);
-    Route::get('/users/{role}/show', [UserController::class, 'show']);
-    Route::get('/users/{role}/edit', [UserController::class, 'edit']);
+    Route::get('/users/{user}/show', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit']);
+    Route::put('/users/{user}', [UserController::class, 'update']);
 });
 
 

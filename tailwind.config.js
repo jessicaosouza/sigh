@@ -43,6 +43,8 @@ module.exports = {
       'old-silver': '#828282',
       'new-york-pink': '#CC8488',
       'complementary-blue': '#84ACCC',
+      'cameo-pink': '#f2bcc7',
+      'pale-pink': '#DBA9AC',
       'ruby': {
         900: '#A2416B',
         800: '#B56789',
@@ -55,7 +57,11 @@ module.exports = {
         100: '#F6ECF0'
       }
     },
-    extend: {},
+    extend: {
+      spacing: {
+        'from-nav': '16.666667%'
+      }
+    },
   },
   plugins: [],
 }

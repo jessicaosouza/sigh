@@ -25,12 +25,17 @@
                     <p class="text-lg font-extrabold tracking-wide font-mono text-complementary-blue">SIGH</p>
                 </div>
                 <div class="mb-4">
-                    <sigh-input class="w-full" type="text" v-model="form.email" placeholder="E-mail" />
+                    <sigh-input class=" w-full" type="text" v-model="form.email" placeholder="E-mail" />
                     <div class="text-xs text-red-600 font-semibold" v-if="form.errors.email">{{ form.errors.email }}</div>
                 </div>
 
                 <div class="mb-1">
-                    <sigh-input class="w-full" type="password" v-model="form.password" placeholder="Senha"  />
+                    <div >
+                        <label class="flex relative items-center">
+                            <sigh-input class="w-full" :type="show_password ? 'password' : 'text'  " v-model="form.password" placeholder="Senha"  />
+                            <span @click="show_password = !show_password" class="text-lg absolute mx-2 pt-2 z-50 cursor-pointer right-0 fi fi-br-eye-crossed text-black" />
+                        </label>
+                    </div>
                     <div class="text-xs text-red-600 font-semibold" v-if="form.errors.password">{{ form.errors.password }}</div>
                 </div>
 
@@ -39,10 +44,10 @@
                         <sigh-checkbox v-model="form.remember"  class="my-2 mr-2"></sigh-checkbox>
                         <span class="mt-1">Lembrar</span>
                     </div>
-                    <div class="flex items-center">
+                    <Link href="reset-password" class="flex items-center cursor-pointer">
                         <span class="fi fi-br-lock mr-1" />
-                        <p>Esqueci minha senha</p>
-                    </div>
+                        <p class="underline">Esqueci minha senha</p>
+                    </Link>
                 </div>
 
                 <sigh-outlined-anchor href="auth/google" class="flex items-center justify-center mb-2">
@@ -82,22 +87,13 @@
 
         data(){
             return{
-                glogin: false
+                show_password: true
             }
         },
 
         methods: {
             submit(){
-                if(this.glogin){
-                    this.googleLogin()
-                }else{
-                    this.form.post('login')
-                }
-
-            },
-
-            googleLogin(){
-                this.form.get('auth/google')
+                this.form.post('login')
             }
         }
     }

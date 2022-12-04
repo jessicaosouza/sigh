@@ -2,16 +2,26 @@
 
 namespace App\Services;
 
+use App\Helpers\Aws;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
-    public static function create($request)
+    public static function store($request)
     {
         $params = $request->all();
         $params['password'] = Hash::make($request->password);
-        return User::create($params);
+        $response = (Object)[];
+        $response->user = User::create($params);
+
+        if(!$request->file('cnh_file')){
+            $response->uploaded_file = null;
+        }else{
+            $response->uploaded_file = Aws::uploadFileS3($request->file('cnh_file'),'users/'.$response->user->id. '/docs/cnh.pdf', env('AWS_BUCKET'));
+        }
+
+        return $response;
     }
 
     public static function update($request, $user)

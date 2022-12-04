@@ -22,6 +22,9 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'rg' => fake()->numerify('###########'),
+            'cpf' => fake()->numerify('#########'),
+            'cnh' => fake()->numerify('###############'),
             'email_verified_at' => now(),
             'joined_at' => now(),
             'level_id' => Level::all()->random()->id,

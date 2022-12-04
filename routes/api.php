@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('roles', [RoleController::class, 'store']);
     Route::get('roles/{role}', [RoleController::class, 'show']);
     Route::put('roles/{role}', [RoleController::class, 'update']);
+    Route::get('roles', [RoleController::class, 'getRoles']);
 
     Route::post('assets', [AssetController::class, 'store']);
     Route::get('assets/{asset}', [AssetController::class, 'show']);

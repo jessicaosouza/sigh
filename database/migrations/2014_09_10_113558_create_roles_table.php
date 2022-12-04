@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('name', 100);
             $table->text('description');
             $table->bigInteger('company_id')->unsigned();
+            $table->bigInteger('department_id')->unsigned()->nullable();
             $table->timestamps();
 
+            $table->foreign('department_id')->references('id')->on('departments');
             $table->foreign('company_id')->references('id')->on('companies');
         });
     }

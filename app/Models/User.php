@@ -20,8 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'rg',
+        'cpf',
+        'cnh',
         'password',
-        'department_id',
         'level_id',
         'role_id',
         'google_id'
@@ -45,11 +47,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function department()
-    {
-        return $this->belongsTo(Department::class, 'department_id');
-    }
 
     public function level()
     {

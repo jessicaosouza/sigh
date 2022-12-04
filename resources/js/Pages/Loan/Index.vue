@@ -4,7 +4,7 @@
         <meta type="description" content="Empréstimos" head-key="description">
     </Head>
     <div class="flex justify-between mb-6">
-        <h1 class="text-3xl font-bold">Empréstimos</h1>
+        <h1 class="text-3xl font-bold text-gray-800">Empréstimos</h1>
         <sigh-input v-model="search" type="text" placeholder="Buscar..." />
     </div>
 
@@ -36,11 +36,11 @@
         </div>
     </div>
     <!-- Paginator -->
-    <Pagination :links="loans.links" class="mt-6" />
+    <Pagination v-if="total()" :resource="'loans'" :data="loans" class="mt-6" />
 </template>
 <script>
 
-    import Pagination from "../../Shared/Paginaton.vue"
+    import Pagination from "../../Components/Pagination.vue"
     import SighInput from "../../Components/Input.vue"
     import debounce from 'lodash/debounce'
     import { Inertia } from '@inertiajs/inertia'
@@ -73,7 +73,11 @@
                     })
                 },
                 300
-            )
+            ),
+
+            total(){
+                return this.loans.total > 10
+            }
         }
     }
 </script>

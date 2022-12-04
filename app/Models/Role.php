@@ -12,8 +12,14 @@ class Role extends Model
     protected $fillable = [
         'name',
         'description',
-        'company_id'
+        'company_id',
+        'department_id'
     ];
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
 
     public function company()
     {

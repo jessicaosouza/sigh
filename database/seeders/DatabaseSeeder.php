@@ -36,9 +36,9 @@ class DatabaseSeeder extends Seeder
         Department::factory(1)->create(['id' => 6, 'name' =>'Produção', 'company_id' => 1]);
         Department::factory(1)->create(['id' => 7, 'name' =>'Qualidade', 'company_id' => 1]);
 
-        Role::factory(1)->create(['id' => 1, 'name' =>'Gerente de Desenvolvimento de Sistemas', 'description' => 'Lidera e gerencia equipe de TI', 'company_id' => 1]);
-        Role::factory(1)->create(['id' => 2, 'name' =>'Gerente Financeiro', 'description' => 'Bla bla bla', 'company_id' => 1]);
-        Role::factory(1)->create(['id' => 3, 'name' =>'Auxiliar de Produção', 'description' => 'Bla bla bla', 'company_id' => 1]);
+        Role::factory(1)->create(['id' => 1, 'name' =>'Gerente de Desenvolvimento de Sistemas', 'description' => 'Lidera e gerencia equipe de TI', 'company_id' => 1, 'department_id'=>'4']);
+        Role::factory(1)->create(['id' => 2, 'name' =>'Gerente Financeiro', 'description' => 'Bla bla bla', 'company_id' => 1, 'department_id'=>3]);
+        Role::factory(1)->create(['id' => 3, 'name' =>'Auxiliar de Produção', 'description' => 'Bla bla bla', 'company_id' => 1, 'department_id'=>6]);
 
         User::factory(1)->create(['id'=>1, 'name'=>'Jessica Oliveira','email'=>'desenvolvimento@orion.ind.br', 'email_verified_at' => now(), 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'remember_token' => Str::random(10), 'level_id'=>1]);
         User::factory(1)->create(['id'=>2, 'name'=>'Camila Freitas','email'=>'camila@mailinator.com', 'email_verified_at' => now(), 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'remember_token' => Str::random(10), 'level_id'=>2, 'role_id' => 2]);

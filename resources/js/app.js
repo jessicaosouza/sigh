@@ -2,6 +2,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp, Link, Head } from '@inertiajs/inertia-vue3'
 import { InertiaProgress } from '@inertiajs/progress'
 import Layout from './Shared/Layout'
+import VueTheMask from 'vue-the-mask'
 
 createInertiaApp({
   resolve: async name => {
@@ -18,12 +19,13 @@ createInertiaApp({
       .use(plugin)
       .component('Link', Link)
       .component('Head', Head)
+      .use(VueTheMask)
       .mount(el)
   },
   title: title => `SIGH - ${title}`
 })
 
 InertiaProgress.init({
-  color: '#F2F2F2',
+  color: '#A2416B',
   showSpinner: true,
 })

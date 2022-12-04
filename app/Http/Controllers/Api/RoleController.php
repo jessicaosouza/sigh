@@ -44,4 +44,9 @@ class RoleController extends Controller
         return response('',500);
     }
 
+    public function getRoles($request)
+    {
+        dd("to aqui na funcao");
+    }
+
 }
