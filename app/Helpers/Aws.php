@@ -53,14 +53,13 @@ class Aws
             ));
             return true;
         } catch (Exception $e) {
-            dd($e);
             $error = (Object)[];
             $error->message = $e->getMessage();
             $error->line = $e->getLine();
             $error->file = $e->getFile();
             $error->file_name = (string) Str::orderedUuid();
             $error->project = 'sigh';
-            $error->request_key = 'cFIbJqihwvY8R2gDdTJOk9vXQXuZHDdm1OZW1TNoN4SuqeTSMEb3XEVrOo2Gcbz10F3v0yYWFY0vqoWu20SJ3SYxDrQnJXv2U5eIncxTZsR7roGHlsd6J67Ld13J45DF';
+            $error->request_key = env('AWS_LAMBDA_REQUEST_KEY');
             $error->title = "Erro ao fazer upload de arquivos no S3 ==> uploadFileS3";
             Http::post('https://in5wusn4jncnjtjbpt7vbii5zq0mobte.lambda-url.sa-east-1.on.aws/', $error);
             report($e);
